@@ -1,5 +1,4 @@
 import telebot
-import time
 import schedule
 import emoji
 import requests
