@@ -8,6 +8,7 @@ pipenv==11.8.0
 psutil==5.0.1
 Pygments==2.2.0
 pyparsing==2.2.0
+pyowm==2.10.0
 pyTelegramBotAPI==3.6.6
 python-telegram-bot==7.0.1
 requests==2.7.0
