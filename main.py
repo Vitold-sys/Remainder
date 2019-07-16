@@ -4,6 +4,9 @@ import emoji
 import requests
 import random
 
+    
+owm = pyowm.OWM('Token', language="ru")
+
 smiles = ['🤣', '😕', '😊', '😀', '😌', '👄', '👎', '👅', '👀', '😊', '🧐', '🤓', '🙃', '💍', '💩']
 animals = ['🐶', '🐴', '🐗', '🦓', '🦒', '🦌', '🐢', '🐍', '🐻', '🐑', '🐖', '🐓', '🐇', '🐀', '🐒']
 
@@ -66,6 +69,23 @@ def eat():
     my_message = "Время покушать" + "\n" + str(eatt)
     telegram_bot_sendtext(my_message)
 
+
+def pogoda():
+    intro = emoji.emojize(":small_orange_diamond:", use_aliases=True)
+    tempem = emoji.emojize(":sunny:", use_aliases=True)
+    humem = emoji.emojize(":droplet:", use_aliases=True)
+    windem = emoji.emojize(":dash:", use_aliases=True)
+    minsk = owm.weather_at_place('Minsk, BY')
+    w = minsk.get_weather()
+    temp = w.get_temperature('celsius')["temp"]
+    hum = w.get_humidity()
+    wind = w.get_wind()["speed"]
+    my_message = str(intro) + "В Минске сейчас: " + w.get_detailed_status() + "\n" +\
+                 str(intro) + "Температура в данный момент в районе: " + str(temp) + str(tempem) + "\n" +\
+                 str(intro) + "Влажность: " + str(hum) + " % " + str(humem) + "\n" + \
+                 str(intro) + "Скорость ветра: " + str(wind) + " м/с " + str(windem)
+    telegram_bot_sendtext(my_message)
+    
 
 schedule.every(1).minutes.do(report)
 schedule.every(2).hours.do(lol)
